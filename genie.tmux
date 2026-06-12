@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# tmux-claude-prompt: natural language -> shell command, with review-before-run
+# tmux-genie: natural language -> shell command, with review-before-run
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -9,10 +9,10 @@ get_tmux_option() {
   echo "${value:-$2}"
 }
 
-key="$(get_tmux_option "@claude_prompt_key" "C-g")"
-no_prefix="$(get_tmux_option "@claude_prompt_no_prefix" "off")"
+key="$(get_tmux_option "@genie_key" "C-g")"
+no_prefix="$(get_tmux_option "@genie_no_prefix" "off")"
 
-# With @claude_prompt_no_prefix on, bind in the root table: the key fires
+# With @genie_no_prefix on, bind in the root table: the key fires
 # directly, no prefix needed. Pick a key nothing inside tmux uses (M-g, F12).
 bind_args=()
 [ "$no_prefix" = "on" ] && bind_args+=("-n")

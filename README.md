@@ -14,7 +14,7 @@ but works with any CLI that accepts `prompt -p "..."` and prints a response.
 2. Type a request at the `claude>` prompt:
    `find files over 100MB owned by uid 1000`
 3. The generated command appears at your shell prompt
-4. Press `Enter` to run it, `Ctrl-C` to discard, or `prefix + Ctrl-g` to rub the lamp again to refine it
+4. Press `Enter` to run it, `Ctrl-C` to discard, or `prefix + Ctrl-g` to rub the lamp again to refine
 
 ### Refining a rejected command
 
@@ -50,30 +50,25 @@ git clone https://github.com/jchamblee99/tmux-genie ~/.tmux/plugins/tmux-genie
 And in `.tmux.conf`:
 
 ```tmux
-run-shell ~/.tmux/plugins/tmux-genie/claude_prompt.tmux
+run-shell ~/.tmux/plugins/tmux-genie/genie.tmux
 ```
 
 ## Options
 
 ```tmux
 # Key binding (default: C-g)
-set -g @claude_prompt_key 'C-g'
+set -g @genie_key 'C-g'
 
 # Bind without the tmux prefix -- a single keystroke summons the genie
 # (default: off). The key is then intercepted globally, so pick one your
 # apps don't need; pair with `bind C-g send-keys C-g` as a pass-through.
-set -g @claude_prompt_no_prefix 'on'
-
-# Show the prompt in a popup anchored to the bottom of the FOCUSED PANE
-# instead of the window status line (default: off). Requires tmux 3.2+.
-# Bonus: this mode has readline editing and no quoting restrictions.
-set -g @claude_prompt_popup 'on'
+set -g @genie_no_prefix 'on'
 
 # Path to the claude binary (default: claude, resolved via PATH)
-set -g @claude_prompt_bin '/usr/local/bin/claude'
+set -g @claude_bin '/usr/local/bin/claude'
 
 # Execute immediately without review (default: off). You are braver than I am.
-set -g @claude_prompt_auto_run 'off'
+set -g @genie_auto_run 'off'
 ```
 
 ## Requirements
@@ -98,8 +93,8 @@ executable bit or picked up CRLF line endings in transit:
 
 ```sh
 cd ~/.tmux/plugins/tmux-genie
-chmod +x claude_prompt.tmux scripts/*.sh
-sed -i 's/\r$//' claude_prompt.tmux scripts/*.sh
+chmod +x genie.tmux scripts/*.sh
+sed -i 's/\r$//' genie.tmux scripts/*.sh
 ```
 
 **No command appears** — run the script by hand to see the real error:

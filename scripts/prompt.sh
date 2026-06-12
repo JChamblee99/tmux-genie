@@ -27,14 +27,14 @@ set_pane_option() {
   tmux set-option -pt "$PANE_ID" "$1" "$2" 2>/dev/null
 }
 
-CLAUDE_BIN="$(get_tmux_option "@claude_prompt_bin" "claude")"
-AUTO_RUN="$(get_tmux_option "@claude_prompt_auto_run" "off")"
-PROMPT_KEY="$(get_tmux_option "@claude_prompt_key" "C-g")"
+CLAUDE_BIN="$(get_tmux_option "@claude_bin" "claude")"
+AUTO_RUN="$(get_tmux_option "@genie_auto_run" "off")"
+PROMPT_KEY="$(get_tmux_option "@genie_key" "C-g")"
 
 [ -z "$INPUT" ] && exit 0
 
-LAST_INPUT="$(get_pane_option @claude_last_input)"
-LAST_CMD="$(get_pane_option @claude_last_cmd)"
+LAST_INPUT="$(get_pane_option @genie_last_input)"
+LAST_CMD="$(get_pane_option @genie_last_cmd)"
 
 # Rejection detection: is the last generated command still on the prompt line?
 REFINE=0
@@ -85,8 +85,8 @@ if [ -z "$CMD" ]; then
 fi
 
 # Remember this round so the next invocation can detect a rejection.
-set_pane_option @claude_last_input "$COMBINED_INPUT"
-set_pane_option @claude_last_cmd "$CMD"
+set_pane_option @genie_last_input "$COMBINED_INPUT"
+set_pane_option @genie_last_cmd "$CMD"
 
 if [ "$AUTO_RUN" = "on" ]; then
   tmux send-keys -t "$PANE_ID" -l "$CMD"
