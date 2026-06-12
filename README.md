@@ -8,6 +8,10 @@ refine.
 Powered by the [Claude Code CLI](https://docs.claude.com/en/docs/claude-code),
 but works with any CLI that accepts `prompt -p "..."` and prints a response.
 
+<p align="center">
+  <img src="assets/demo.gif" alt="tmux-genie demo: typing a request and watching the shell command appear" width="800">
+</p>
+
 ## Usage
 
 1. Press `prefix + Ctrl-g`
